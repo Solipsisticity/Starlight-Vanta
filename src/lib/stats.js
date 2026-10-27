@@ -13,8 +13,6 @@ export const EMPTY_STATS = {
   styles: [],
 };
 
-// Batched so a burst of regenerate clicks is one request. Nothing about the
-// visitor travels with it — a number and the name of a style, and that is all.
 export function useStats({ contribute = true } = {}) {
   const [stats, setStats] = useState(EMPTY_STATS);
   const [loaded, setLoaded] = useState(false);
@@ -34,7 +32,7 @@ export function useStats({ contribute = true } = {}) {
       });
       if (res.ok) setStats(await res.json());
     } catch {
-      /* the counter is decoration; a failed write never interrupts generating */
+      return;
     }
   }, []);
 

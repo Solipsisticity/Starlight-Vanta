@@ -1,3 +1,5 @@
+"use client";
+
 import { useRef, useState } from "react";
 import { motion, useMotionTemplate, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { Bookmark, Check, Copy, Shuffle } from "lucide-react";
@@ -49,7 +51,7 @@ export default function ResultCard({ item, onRemix, index = 0 }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 1400);
     } catch {
-      /* clipboard unavailable */
+      setCopied(false);
     }
     playClick(settings.soundEffects);
   }

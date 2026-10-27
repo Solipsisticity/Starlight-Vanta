@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 const YEAR = new Date().getFullYear();
 
@@ -15,12 +15,13 @@ export default function Footer() {
         </div>
 
         <div className="grid grid-cols-2 gap-x-10 gap-y-2 text-xs sm:grid-cols-3">
-          <Link to="/generator" className="text-white/45 transition-colors hover:text-white">Generator</Link>
-          <Link to="/collections" className="text-white/45 transition-colors hover:text-white">Collections</Link>
-          <Link to="/builder" className="text-white/45 transition-colors hover:text-white">Builder</Link>
-          <Link to="/donate" className="text-white/45 transition-colors hover:text-white">Donate</Link>
-          <Link to="/privacy" className="text-white/45 transition-colors hover:text-white">Privacy</Link>
-          <Link to="/terms" className="text-white/45 transition-colors hover:text-white">Terms</Link>
+          <Link href="/generator" className="text-white/45 transition-colors hover:text-white">Generator</Link>
+          <Link href="/collections" className="text-white/45 transition-colors hover:text-white">Collections</Link>
+          <Link href="/builder" className="text-white/45 transition-colors hover:text-white">Builder</Link>
+          <Link href="/donate" className="text-white/45 transition-colors hover:text-white">Donate</Link>
+          <Link href="/privacy" className="text-white/45 transition-colors hover:text-white">Privacy</Link>
+          <Link href="/terms" className="text-white/45 transition-colors hover:text-white">Terms</Link>
+          <Link href="/cookies" className="text-white/45 transition-colors hover:text-white">Cookies</Link>
         </div>
       </div>
 

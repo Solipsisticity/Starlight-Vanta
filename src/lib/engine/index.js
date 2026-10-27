@@ -1,7 +1,6 @@
 import {
-  AFFIX_HEAD,
-  AFFIX_TAIL,
   BLOCKED_SUBSTRINGS,
+  ENDINGS,
   NUMBER_SUFFIXES,
   REGISTERS,
   REGISTER_WEIGHTS,
@@ -12,7 +11,7 @@ import {
   TONES,
   TONE_LABELS,
 } from "./lexicon.js";
-import { cleanStem, coinWord, isPronounceable, isVowel, joinParts, tailFrom } from "./phonology.js";
+import { coinWord, isPronounceable, isVowel, joinParts, soundsNatural } from "./phonology.js";
 import { describe, flow, rarity } from "./score.js";
 
 export { STYLES, STRUCTURES, STRUCTURE_LABELS, TONES, TONE_LABELS };
@@ -55,62 +54,64 @@ function trimRoot(word) {
   return word.replace(/(ing|ed|ium|ius|us|um)$/, "");
 }
 
-function shorten(rng, word) {
-  if (word.length <= 5) return word;
-  const cut = word.slice(0, 4 + rng.int(2));
-  return isPronounceable(cut) ? cut : word;
+function withEnding(stem, ending) {
+  const base = stem.length > 4 && /[^aeiouy]e$/.test(stem) ? stem.slice(0, -1) : stem;
+  const lastIsVowel = isVowel(base[base.length - 1]);
+  if (lastIsVowel && isVowel(ending[0])) return base.slice(0, -1) + ending;
+  if (!lastIsVowel && !isVowel(ending[0])) return null;
+  return base + ending;
 }
 
 function buildSingle(rng, pool) {
   return rng.pick(rng.chance(0.35) ? SHORT_ROOTS : pool);
 }
 
-// A blend only earns its place when the two roots actually share a seam, or
-// when a vowel hands off cleanly to a consonant. Anything else is two words
-// shoved together, which is exactly what reads as generated.
+function portmanteau(left, right) {
+  const options = [];
+  const minLeft = Math.max(3, Math.ceil(left.length * 0.6));
+  const minRight = Math.max(4, Math.ceil(right.length * 0.6));
+  for (let i = minLeft; i <= left.length; i += 1) {
+    const pivot = left[i - 1];
+    for (let j = 1; j <= right.length - minRight + 1; j += 1) {
+      if (right[j - 1] !== pivot) continue;
+      if (j > 1 && !isVowel(right[j - 2]) && !isVowel(pivot)) continue;
+      const merged = left.slice(0, i) + right.slice(j);
+      if (merged !== left && merged !== right && merged.length >= 5 && merged.length <= 10) options.push(merged);
+    }
+  }
+  return options;
+}
+
 function buildBlend(rng, pool) {
   const left = trimRoot(rng.pick(pool));
   const right = trimRoot(rng.pick(pool));
   if (left === right || left.slice(0, 3) === right.slice(0, 3)) return null;
-
-  const head = cleanStem(left, 3, 5);
-  const tail = rng.chance(0.55) ? tailFrom(right, 3) : right;
-  if (!head || tail.length < 3) return null;
-
-  for (let overlap = Math.min(3, head.length - 1, tail.length - 1); overlap >= 1; overlap -= 1) {
-    if (head.slice(-overlap) === tail.slice(0, overlap)) {
-      const merged = head + tail.slice(overlap);
-      return merged.length >= 5 && merged.length <= 11 ? merged : null;
-    }
-  }
-
-  const handoff = isVowel(head[head.length - 1]) && !isVowel(tail[0]);
-  if (!handoff || head.length + tail.length > 9) return null;
-  return head + tail;
+  const options = portmanteau(left, right).filter(soundsNatural);
+  return options.length ? rng.pick(options) : null;
 }
 
 function buildRootAffix(rng, pool) {
   const root = trimRoot(rng.pick(rng.chance(0.4) ? SHORT_ROOTS : pool));
-  return rng.chance(0.25)
-    ? joinParts(rng.pick(AFFIX_HEAD), root)
-    : joinParts(shorten(rng, root), rng.pick(AFFIX_TAIL));
+  if (root.length > 7) return null;
+  return withEnding(root, rng.pick(ENDINGS));
 }
 
 function buildCoined(rng) {
-  return coinWord(rng, rng.chance(0.62) ? 2 : 3);
+  return coinWord(rng, rng.chance(0.7) ? 2 : 3);
 }
 
 function buildCompound(rng, pool) {
   const left = rng.pick(SHORT_ROOTS);
   const right = trimRoot(rng.pick(pool));
   if (left === right || right.startsWith(left) || right.length > 7) return null;
-  const compound = joinParts(left, right);
+  if (isVowel(left[left.length - 1]) && isVowel(right[0])) return null;
+  const compound = left.endsWith(right[0]) ? left + right.slice(1) : left + right;
   return compound.length >= 5 && compound.length <= 11 ? compound : null;
 }
 
 function buildNumbered(rng, pool) {
   const base = rng.chance(0.5) ? buildSingle(rng, pool) : buildRootAffix(rng, pool);
-  return base + rng.pick(NUMBER_SUFFIXES);
+  return base ? base + rng.pick(NUMBER_SUFFIXES) : null;
 }
 
 const BUILDERS = {
@@ -121,6 +122,8 @@ const BUILDERS = {
   compound: buildCompound,
   numbered: buildNumbered,
 };
+
+const WHOLE_WORD_STRUCTURES = new Set(["single", "compound"]);
 
 function applyTone(rng, name, tone) {
   switch (tone) {
@@ -138,11 +141,9 @@ function applyTone(rng, name, tone) {
   }
 }
 
-// Invented words drift into real English surprisingly often; these are the
-// fragments that give it away.
 const ENGLISH_NOISE = /their|there|about|would|could|should|people|through|another|between|nothing|thing|which|where|because|please|really/;
 
-const FLOW_FLOOR = { coined: 85, blend: 82, compound: 80, seeded: 80, remix: 78, default: 74 };
+const FLOW_FLOOR = { coined: 84, blend: 80, compound: 72, seeded: 76, remix: 76, default: 74 };
 
 function isAcceptable(name, config, structure = "default") {
   const bare = name.toLowerCase();
@@ -155,6 +156,7 @@ function isAcceptable(name, config, structure = "default") {
   const letters = bare.replace(/[0-9_]/g, "");
   if (!isPronounceable(letters)) return false;
   if (ENGLISH_NOISE.test(letters)) return false;
+  if (!WHOLE_WORD_STRUCTURES.has(structure) && structure !== "numbered" && !soundsNatural(letters)) return false;
   return flow(letters) >= (FLOW_FLOOR[structure] ?? FLOW_FLOOR.default);
 }
 
@@ -206,11 +208,10 @@ export function generate(rawConfig, count = 12, seed = randomSeed()) {
   const active = structures.length ? structures : ["single"];
 
   let attempts = 0;
-  while (results.size < count && attempts < count * 120) {
+  while (results.size < count && attempts < count * 160) {
     attempts += 1;
     const structure = active[attempts % active.length];
-    const build = BUILDERS[structure];
-    const raw = build(rng, pool);
+    const raw = BUILDERS[structure](rng, pool);
     if (!raw) continue;
 
     const toned = applyTone(rng, String(raw).toLowerCase(), config.tone);
@@ -219,7 +220,6 @@ export function generate(rawConfig, count = 12, seed = randomSeed()) {
     const key = toned.toLowerCase();
     if (results.has(key)) continue;
 
-    // Keep the grid varied: at most two names sharing the same opening stem.
     const stem = key.slice(0, 3);
     if ((stems.get(stem) || 0) >= 2) continue;
     stems.set(stem, (stems.get(stem) || 0) + 1);
@@ -230,7 +230,20 @@ export function generate(rawConfig, count = 12, seed = randomSeed()) {
   return [...results.values()].sort((a, b) => b.rarity + b.flow - (a.rarity + a.flow));
 }
 
-// Names built around a word the visitor typed, rather than a random root.
+function collect(recipes, count, accept) {
+  const results = new Map();
+  let attempts = 0;
+  while (results.size < count && attempts < count * 60) {
+    const raw = recipes[attempts % recipes.length]();
+    attempts += 1;
+    if (!raw) continue;
+    const candidate = raw.toLowerCase();
+    if (results.has(candidate) || !accept(candidate)) continue;
+    results.set(candidate, candidate);
+  }
+  return [...results.values()];
+}
+
 export function generateFromSeed(word, rawConfig, count = 9, seed = randomSeed()) {
   const config = normalizeConfig({ ...rawConfig, minLength: 3, maxLength: 13 });
   const base = String(word || "").toLowerCase().replace(/[^a-z]/g, "");
@@ -238,32 +251,25 @@ export function generateFromSeed(word, rawConfig, count = 9, seed = randomSeed()
 
   const rng = createRng(seed);
   const pool = rootPool(config.style);
-  const results = new Map();
   const stem = trimRoot(base);
 
   const recipes = [
-    () => joinParts(stem, rng.pick(AFFIX_TAIL)),
-    () => joinParts(rng.pick(AFFIX_HEAD), base),
-    () => joinParts(stem, trimRoot(rng.pick(pool))),
-    () => joinParts(trimRoot(rng.pick(pool)), base),
-    () => joinParts(stem, rng.pick(SHORT_ROOTS)),
-    () => joinParts(rng.pick(SHORT_ROOTS), base),
-    () => joinParts(shorten(rng, stem), rng.pick(AFFIX_TAIL)),
+    () => withEnding(stem, rng.pick(ENDINGS)),
+    () => portmanteau(stem, trimRoot(rng.pick(pool))).find(soundsNatural),
+    () => portmanteau(trimRoot(rng.pick(pool)), base).find(soundsNatural),
+    () => stem + rng.pick(SHORT_ROOTS),
+    () => rng.pick(SHORT_ROOTS) + base,
+    () => withEnding(stem.slice(0, Math.max(3, stem.length - 1)), rng.pick(ENDINGS)),
   ];
 
-  let attempts = 0;
-  while (results.size < count && attempts < count * 60) {
-    const raw = recipes[attempts % recipes.length]();
-    attempts += 1;
-    if (!raw) continue;
-    const toned = applyTone(rng, raw.toLowerCase(), config.tone);
-    if (!isAcceptable(toned, { ...config, minLength: 3, maxLength: 13 }, "seeded")) continue;
-    const key = toned.toLowerCase();
-    if (key === base || results.has(key)) continue;
-    results.set(key, decorate(toned, config, "seeded"));
-  }
+  const names = collect(recipes, count, (candidate) => {
+    const toned = applyTone(rng, candidate, config.tone);
+    return candidate !== base && isAcceptable(toned, { ...config, minLength: 3, maxLength: 13 }, "compound");
+  });
 
-  return [...results.values()].sort((a, b) => b.rarity + b.flow - (a.rarity + a.flow));
+  return names
+    .map((name) => decorate(applyTone(rng, name, config.tone), config, "seeded"))
+    .sort((a, b) => b.rarity + b.flow - (a.rarity + a.flow));
 }
 
 export function remix(name, count = 9, seed = randomSeed()) {
@@ -272,32 +278,23 @@ export function remix(name, count = 9, seed = randomSeed()) {
   const rng = createRng(seed);
   const letters = base.replace(/[^a-z]/g, "");
   const stem = trimRoot(letters);
-  const results = new Map();
 
   const recipes = [
-    () => joinParts(stem, rng.pick(AFFIX_TAIL)),
-    () => joinParts(rng.pick(AFFIX_HEAD), letters),
+    () => withEnding(stem, rng.pick(ENDINGS)),
     () => letters.replace(/[aeiou]$/, "") + rng.pick(["a", "e", "o", "ia", "ae"]),
-    () => joinParts(stem, rng.pick(SHORT_ROOTS)),
-    () => joinParts(rng.pick(SHORT_ROOTS), stem),
-    () => letters.slice(0, Math.max(3, letters.length - 2)) + rng.pick(AFFIX_TAIL),
-    () => joinParts(letters, rng.pick(["ix", "yn", "ora", "eon"])),
+    () => stem + rng.pick(SHORT_ROOTS),
+    () => rng.pick(SHORT_ROOTS) + stem,
+    () => withEnding(letters.slice(0, Math.max(3, letters.length - 2)), rng.pick(ENDINGS)),
+    () => portmanteau(letters, rng.pick(SHORT_ROOTS)).find(soundsNatural),
   ];
 
-  let attempts = 0;
-  while (results.size < count && attempts < count * 40) {
-    const raw = recipes[attempts % recipes.length]();
-    attempts += 1;
-    if (!raw) continue;
-    const candidate = raw.toLowerCase();
-    if (candidate === base || results.has(candidate)) continue;
-    if (candidate.length < 3 || candidate.length > 18) continue;
-    if (!isPronounceable(candidate)) continue;
-    if (BLOCKED_SUBSTRINGS.some((blocked) => candidate.includes(blocked))) continue;
-    results.set(candidate, decorate(candidate, { style: "remix" }, "remix"));
-  }
-
-  return [...results.values()];
+  return collect(recipes, count, (candidate) =>
+    candidate !== base &&
+    candidate.length >= 3 &&
+    candidate.length <= 16 &&
+    isPronounceable(candidate) &&
+    !BLOCKED_SUBSTRINGS.some((blocked) => candidate.includes(blocked)),
+  ).map((candidate) => decorate(candidate, { style: "remix" }, "remix"));
 }
 
 export function buildCustom({ head = "", core = "", tail = "", tone = "lowercase" }) {

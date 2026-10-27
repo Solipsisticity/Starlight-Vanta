@@ -17,6 +17,6 @@ export function playClick(enabled) {
     oscillator.stop(ctx.currentTime + 0.12);
     oscillator.onended = () => ctx.close();
   } catch {
-    /* audio blocked */
+    return;
   }
 }

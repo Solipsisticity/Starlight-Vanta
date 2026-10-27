@@ -45,12 +45,17 @@ export const PAGE_META = {
   "/privacy": {
     title: "Privacy policy",
     description:
-      "What Starlight Vanta stores, what the anonymous generation counter records, and how donations are handled. No accounts, no cookies, no analytics.",
+      "What Starlight Vanta stores, what the anonymous generation counter records, and how donations are handled. No accounts, no advertising, no analytics.",
   },
   "/terms": {
     title: "Terms of service",
     description:
       "The terms covering use of Starlight Vanta, ownership of the generator, what a generated name does and does not come with, and how donations are treated.",
+  },
+  "/cookies": {
+    title: "Cookie policy",
+    description:
+      "Every cookie and browser storage value Starlight Vanta can use: local preferences, saved names, and the two Stripe cookies on the Donate page.",
   },
   "/404": {
     title: "Page not found",
@@ -70,5 +75,49 @@ export function resolveMeta(path) {
     path,
     fullTitle: path === "/" ? meta.title : `${meta.title} · ${SITE_NAME}`,
     url: `${SITE_URL}${path === "/" ? "/" : path}`,
+  };
+}
+
+export const SITE_SCHEMA = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebApplication",
+      "@id": `${SITE_URL}/#app`,
+      name: SITE_NAME,
+      url: `${SITE_URL}/`,
+      applicationCategory: "UtilitiesApplication",
+      operatingSystem: "Any",
+      browserRequirements: "Requires JavaScript",
+      description: "A username generator that builds pronounceable, uncommon names from phonetic rules entirely inside the browser.",
+      offers: { "@type": "Offer", price: "0", priceCurrency: "USD" },
+      publisher: { "@id": `${SITE_URL}/#publisher` },
+    },
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#publisher`,
+      name: "Starlight Solutions, Inc.",
+      url: "https://www.starsolenterprise.com/",
+    },
+  ],
+};
+
+export function pageMetadata(path) {
+  const meta = resolveMeta(path);
+  const index = !meta.noindex;
+  return {
+    title: { absolute: meta.fullTitle },
+    description: meta.description,
+    alternates: path === "/404" ? undefined : { canonical: meta.url },
+    robots: { index, follow: true, googleBot: { index, follow: true, "max-image-preview": "large" } },
+    openGraph: {
+      type: "website",
+      siteName: SITE_NAME,
+      locale: "en_US",
+      title: meta.fullTitle,
+      description: meta.description,
+      url: meta.url,
+    },
+    twitter: { card: "summary_large_image", title: meta.fullTitle, description: meta.description },
   };
 }

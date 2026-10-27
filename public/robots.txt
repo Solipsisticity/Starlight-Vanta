@@ -1,6 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /saved
-Disallow: /settings
-
-Sitemap: https://vanta.starsolenterprise.com/sitemap.xml

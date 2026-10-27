@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import Link from "next/link";
 
 export default function EmptyState({ title, desc, actionLabel, to }) {
   return (
@@ -10,7 +10,7 @@ export default function EmptyState({ title, desc, actionLabel, to }) {
       <p className="max-w-sm text-sm text-white/40">{desc}</p>
       {actionLabel && to && (
         <Link
-          to={to}
+          href={to}
           className="rounded-full bg-violet-600 px-5 py-2 text-sm font-medium text-white shadow-[0_0_22px_-6px_rgba(124,58,237,0.8)] transition-colors duration-300 hover:bg-violet-500"
         >
           {actionLabel}

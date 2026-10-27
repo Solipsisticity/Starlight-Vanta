@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { isBrowser } from "./utils";
 
 function read(key, fallback) {
@@ -14,11 +14,11 @@ function read(key, fallback) {
 export function useLocalState(key, initial) {
   const [value, setValue] = useState(initial);
   const [hydrated, setHydrated] = useState(false);
+  const fallback = useRef(initial);
 
   useEffect(() => {
-    setValue(read(key, initial));
+    setValue(read(key, fallback.current));
     setHydrated(true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key]);
 
   const set = useCallback(
@@ -29,7 +29,7 @@ export function useLocalState(key, initial) {
           try {
             window.localStorage.setItem(key, JSON.stringify(next));
           } catch {
-            /* storage unavailable — the session still works, it just won't persist */
+            return next;
           }
         }
         return next;

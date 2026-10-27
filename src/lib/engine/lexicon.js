@@ -47,20 +47,14 @@ export const REGISTERS = {
 };
 
 export const SHORT_ROOTS = [
-  "arc", "ash", "aur", "cael", "cove", "dusk", "elm", "fay", "flux", "glen",
-  "haze", "iris", "jade", "kai", "lark", "lume", "lux", "mira", "moss", "nyx",
-  "onyx", "opal", "quill", "reef", "rune", "sage", "sol", "tide", "vale",
-  "vane", "vega", "veil", "vex", "wisp", "wren", "wyn", "yew", "zeph",
+  "arc", "ash", "cove", "dusk", "echo", "elm", "ember", "fern", "flux", "frost", "glen",
+  "halo", "haze", "iris", "jade", "kite", "lark", "lux", "mira", "moss", "nova", "nyx",
+  "onyx", "opal", "quill", "reef", "rune", "sage", "sol", "tide", "vale", "vane", "vega",
+  "veil", "vex", "wisp", "wren", "yew",
 ];
 
-export const AFFIX_HEAD = [
-  "aer", "ala", "cel", "cin", "cyr", "del", "ely", "eve", "hal", "ilo",
-  "kal", "lue", "mar", "nol", "oro", "ryl", "sel", "ter", "val", "ver",
-];
-
-export const AFFIX_TAIL = [
-  "ara", "ael", "eon", "era", "ia", "ine", "ion", "ira", "is", "ith",
-  "ix", "lyn", "ona", "ora", "ox", "ris", "ryn", "sen", "ven", "yn",
+export const ENDINGS = [
+  "a", "ia", "ara", "ora", "is", "ix", "en", "yn", "el", "on", "ine", "eth", "ira", "ette",
 ];
 
 export const REGISTER_WEIGHTS = {
@@ -105,8 +99,6 @@ export const TONE_LABELS = {
   spaced: "with separator",
 };
 
-// Anything that could read as a slur, a real-world brand, or an obvious
-// impersonation risk is filtered out before a name is ever shown.
 export const BLOCKED_SUBSTRINGS = [
   "admin", "anal", "cunt", "fuck", "hitler", "kill", "nazi", "nigg", "porn",
   "rape", "sex", "shit", "slut", "support", "twat", "official", "verified",

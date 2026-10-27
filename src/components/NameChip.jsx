@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { cn } from "../lib/utils";
@@ -11,7 +13,7 @@ export default function NameChip({ name, rarity, size = "md" }) {
       setCopied(true);
       setTimeout(() => setCopied(false), 1300);
     } catch {
-      /* clipboard unavailable */
+      setCopied(false);
     }
   }
 
