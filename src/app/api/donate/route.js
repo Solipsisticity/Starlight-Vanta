@@ -56,7 +56,7 @@ export async function POST(request) {
     const intent = await stripe.paymentIntents.create({
       amount,
       currency: "usd",
-      description: "Donation to Starlight Vanta",
+      description: "Donation to Starlapse Vanta",
       automatic_payment_methods: { enabled: true },
       metadata: { product: "starlight-vanta", kind: "donation" },
     });

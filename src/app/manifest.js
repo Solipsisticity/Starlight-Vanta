@@ -1,6 +1,6 @@
 export default function manifest() {
   return {
-    name: "Starlight Vanta",
+    name: "Starlapse Vanta",
     short_name: "Vanta",
     description: "A username generator that runs entirely in your browser.",
     start_url: "/",

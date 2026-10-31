@@ -5,7 +5,7 @@ const SECTIONS = [
     id: "agreement",
     heading: "Agreement",
     body: [
-      "These Terms govern your use of Starlight Vanta at vanta.starsolenterprise.com, operated by Starlight Solutions, Inc., a Delaware corporation. By using the site you accept them, together with our Privacy Policy and Cookie Policy. If you do not accept them, do not use the site.",
+      "These Terms govern your use of Starlapse Vanta at vanta.starsolenterprise.com, operated by Starlight Solutions, Inc., a Delaware corporation. By using the site you accept them, together with our Privacy Policy and Cookie Policy. If you do not accept them, do not use the site.",
       "There is no account to create, so acceptance is by use. You must be old enough to enter into a binding agreement where you live, and at least 13 years old, to use the site.",
     ],
   },
@@ -13,7 +13,7 @@ const SECTIONS = [
     id: "service",
     heading: "What the service is",
     body: [
-      "Starlight Vanta generates candidate usernames. The generator runs inside your browser using code delivered with the page. It produces character strings from a vocabulary and a set of phonetic rules.",
+      "Starlapse Vanta generates candidate usernames. The generator runs inside your browser using code delivered with the page. It produces character strings from a vocabulary and a set of phonetic rules.",
       "The service is provided free of charge. We may change, suspend or discontinue any part of it at any time, and we are not obliged to keep any particular feature, preset or collection available.",
     ],
   },
@@ -43,7 +43,7 @@ const SECTIONS = [
     id: "ownership",
     heading: "Ownership of the site",
     body: [
-      "The site itself — its interface, wording, the generation engine, the curated vocabulary, the scoring model and the Starlight Vanta and Starlight Solutions names and marks — is owned by Starlight Solutions, Inc. and protected by copyright and other laws.",
+      "The site itself — its interface, wording, the generation engine, the curated vocabulary, the scoring model and the Starlapse Vanta and Starlapse Solutions names and marks — is owned by Starlight Solutions, Inc. and protected by copyright and other laws.",
       "You are granted a personal, revocable, non-exclusive licence to use the site as published. That licence does not include the right to copy the engine or vocabulary into another product, to resell access, or to present the service as your own.",
     ],
   },

@@ -1,7 +1,7 @@
 import { ImageResponse } from "next/og";
 import { MARK_PATH } from "@/components/VantaMark";
 
-export const alt = "Starlight Vanta, a username generator that runs in your browser";
+export const alt = "Starlapse Vanta, a username generator that runs in your browser";
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
@@ -16,7 +16,7 @@ export default function OpengraphImage() {
             <path d={MARK_PATH} fill="#f2efff" />
             <rect x="46" y="46" width="8" height="5" rx="1" fill="#8b5cf6" />
           </svg>
-          <div style={{ fontSize: 34, fontWeight: 600, letterSpacing: -0.5 }}>Starlight Vanta</div>
+          <div style={{ fontSize: 34, fontWeight: 600, letterSpacing: -0.5 }}>Starlapse Vanta</div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 22 }}>
           <div style={{ fontSize: 72, fontWeight: 700, letterSpacing: -2, lineHeight: 1.05, maxWidth: 900 }}>Usernames you can actually say out loud.</div>
