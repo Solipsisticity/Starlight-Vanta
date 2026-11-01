@@ -9,9 +9,9 @@ const mono = JetBrains_Mono({ subsets: ["latin"], weight: ["400", "500"], variab
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   applicationName: SITE_NAME,
-  authors: [{ name: "Starlight Solutions, Inc.", url: "https://www.starsolenterprise.com/" }],
-  creator: "Starlight Solutions, Inc.",
-  publisher: "Starlight Solutions, Inc.",
+  authors: [{ name: "Starlapse Solutions, Inc.", url: "https://www.starsolenterprise.com/" }],
+  creator: "Starlapse Solutions, Inc.",
+  publisher: "Starlapse Solutions, Inc.",
   formatDetection: { telephone: false, email: false, address: false },
 };
 

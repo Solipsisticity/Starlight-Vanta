@@ -10,7 +10,7 @@ export default function Footer() {
           <p className="text-sm font-medium text-white/80">Starlapse Vanta</p>
           <p className="mt-2 text-xs leading-relaxed text-white/40">
             A username generator that runs entirely in the page you are reading. Built and
-            maintained in-house by Starlight Solutions, Inc.
+            maintained in-house by Starlapse Solutions, Inc.
           </p>
         </div>
 
@@ -27,8 +27,8 @@ export default function Footer() {
 
       <div className="mx-auto w-full max-w-7xl border-t border-white/5 px-4 py-5 sm:px-6 lg:px-8">
         <p className="text-[11px] text-white/30">
-          © {YEAR} Starlight Solutions, Inc. All rights reserved. Starlapse Vanta is a product of
-          Starlight Solutions, Inc.
+          © {YEAR} Starlapse Solutions, Inc. All rights reserved. Starlapse Vanta is a product of
+          Starlapse Solutions, Inc.
         </p>
       </div>
     </footer>

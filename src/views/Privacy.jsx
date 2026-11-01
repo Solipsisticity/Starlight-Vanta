@@ -13,7 +13,7 @@ const SECTIONS = [
     id: "who",
     heading: "Who is responsible",
     body: [
-      "Starlapse Vanta is operated by Starlight Solutions, Inc. (“we”, “us”). Questions about this policy can be sent to privacy@starsolenterprise.com.",
+      "Starlapse Vanta is operated by Starlapse Solutions, Inc. (“we”, “us”). Questions about this policy can be sent to privacy@starsolenterprise.com.",
     ],
   },
   {

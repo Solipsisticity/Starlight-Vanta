@@ -96,7 +96,7 @@ export const SITE_SCHEMA = {
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#publisher`,
-      name: "Starlight Solutions, Inc.",
+      name: "Starlapse Solutions, Inc.",
       url: "https://www.starsolenterprise.com/",
     },
   ],

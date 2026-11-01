@@ -378,7 +378,7 @@ export default function Donate() {
               </div>
 
               <p className="text-[11px] leading-relaxed text-white/25">
-                Donations are voluntary contributions to Starlight Solutions, Inc., not a purchase,
+                Donations are voluntary contributions to Starlapse Solutions, Inc., not a purchase,
                 and they are not tax deductible or refundable except where the law requires it. See{" "}
                 <Link href="/terms" className="underline underline-offset-2 hover:text-white/50">
                   Terms
