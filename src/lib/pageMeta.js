@@ -1,9 +1,9 @@
 export const SITE_URL = "https://vanta.starsolenterprise.com";
-export const SITE_NAME = "Starlapse Vanta";
+export const SITE_NAME = "Starlight Vanta";
 
 export const PAGE_META = {
   "/": {
-    title: "Starlapse Vanta — username generator that runs in your browser",
+    title: "Starlight Vanta — username generator that runs in your browser",
     description:
       "Build pronounceable, genuinely uncommon usernames from phonetic rules rather than a word list. Everything is generated on your own device; nothing you make is uploaded.",
   },
@@ -20,7 +20,7 @@ export const PAGE_META = {
   "/presets": {
     title: "Presets",
     description:
-      "Eight saved configurations for the Starlapse Vanta generator, from four-letter rarities to invented words and competitive tags.",
+      "Eight saved configurations for the Starlight Vanta generator, from four-letter rarities to invented words and competitive tags.",
   },
   "/builder": {
     title: "Builder",
@@ -34,32 +34,32 @@ export const PAGE_META = {
   },
   "/settings": {
     title: "Settings",
-    description: "Motion, sound, history retention and what Starlapse Vanta stores in your browser.",
+    description: "Motion, sound, history retention and what Starlight Vanta stores in your browser.",
     noindex: true,
   },
   "/donate": {
     title: "Donate",
     description:
-      "Starlapse Vanta is free, has no accounts and runs no advertising. Contributions cover hosting and are processed by Stripe.",
+      "Starlight Vanta is free, has no accounts and runs no advertising. Contributions cover hosting and are processed by Stripe.",
   },
   "/privacy": {
     title: "Privacy policy",
     description:
-      "What Starlapse Vanta stores, what the anonymous generation counter records, and how donations are handled. No accounts, no advertising, no analytics.",
+      "What Starlight Vanta stores, what the anonymous generation counter records, and how donations are handled. No accounts, no advertising, no analytics.",
   },
   "/terms": {
     title: "Terms of service",
     description:
-      "The terms covering use of Starlapse Vanta, ownership of the generator, what a generated name does and does not come with, and how donations are treated.",
+      "The terms covering use of Starlight Vanta, ownership of the generator, what a generated name does and does not come with, and how donations are treated.",
   },
   "/cookies": {
     title: "Cookie policy",
     description:
-      "Every cookie and browser storage value Starlapse Vanta can use: local preferences, saved names, and the two Stripe cookies on the Donate page.",
+      "Every cookie and browser storage value Starlight Vanta can use: local preferences, saved names, and the two Stripe cookies on the Donate page.",
   },
   "/404": {
     title: "Page not found",
-    description: "That address does not exist on Starlapse Vanta.",
+    description: "That address does not exist on Starlight Vanta.",
     noindex: true,
   },
 };
@@ -96,7 +96,7 @@ export const SITE_SCHEMA = {
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#publisher`,
-      name: "Starlapse Solutions, Inc.",
+      name: "Starlight Solutions, Inc.",
       url: "https://www.starsolenterprise.com/",
     },
   ],

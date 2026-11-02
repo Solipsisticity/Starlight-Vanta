@@ -5,14 +5,14 @@ const SECTIONS = [
     id: "summary",
     heading: "The short version",
     body: [
-      "Starlapse Vanta does not use advertising cookies, analytics cookies, tracking pixels or cross-site trackers. Your preferences and saved names live in your browser's local storage, and the only cookies come from Stripe, and only on the Donate page.",
+      "Starlight Vanta does not use advertising cookies, analytics cookies, tracking pixels or cross-site trackers. Your preferences and saved names live in your browser's local storage, and the only cookies come from Stripe, and only on the Donate page.",
     ],
   },
   {
     id: "storage",
     heading: "Local storage",
     body: [
-      "Local storage keeps information on your device for this site only. It is never sent with a request, so we cannot read it. These are the values Starlapse Vanta writes:",
+      "Local storage keeps information on your device for this site only. It is never sent with a request, so we cannot read it. These are the values Starlight Vanta writes:",
     ],
     list: [
       "vanta.favorites: names you have bookmarked. Kept until you remove them.",
@@ -59,7 +59,7 @@ export default function Cookies() {
     <LegalPage
       title="Cookie policy"
       updated="27 October 2026"
-      intro={["Every cookie and piece of browser storage Starlapse Vanta can use, what each one is for, and how to remove it."]}
+      intro={["Every cookie and piece of browser storage Starlight Vanta can use, what each one is for, and how to remove it."]}
       sections={SECTIONS}
     />
   );

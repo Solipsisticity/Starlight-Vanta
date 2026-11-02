@@ -29,7 +29,7 @@ export default function Nav() {
         <div className="flex items-center justify-between gap-4">
           <Link href="/" className="flex items-center gap-2" onClick={() => setOpen(false)}>
             <VantaMark className="h-[18px] w-[18px]" />
-            <span className="text-sm font-semibold tracking-tight text-white">Starlapse Vanta</span>
+            <span className="text-sm font-semibold tracking-tight text-white">Starlight Vanta</span>
           </Link>
 
           <div className="hidden items-center gap-1 lg:flex">
