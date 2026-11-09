@@ -5,7 +5,7 @@ const SECTIONS = [
     id: "agreement",
     heading: "Agreement",
     body: [
-      "These Terms govern your use of Starlight Vanta at vanta.starsolenterprise.com, operated by Starlight Solutions, Inc., a Delaware corporation. By using the site you accept them, together with our Privacy Policy and Cookie Policy. If you do not accept them, do not use the site.",
+      "These Terms govern your use of Starlight Vanta at vanta.starsolenterprise.com, operated by Starlight Solutions, a business that is not yet incorporated and plans to incorporate in Wyoming. By using the site you accept them, together with our Privacy Policy and Cookie Policy. If you do not accept them, do not use the site.",
       "There is no account to create, so acceptance is by use. You must be old enough to enter into a binding agreement where you live, and at least 13 years old, to use the site.",
     ],
   },
@@ -43,7 +43,7 @@ const SECTIONS = [
     id: "ownership",
     heading: "Ownership of the site",
     body: [
-      "The site itself — its interface, wording, the generation engine, the curated vocabulary, the scoring model and the Starlight Vanta and Starlight Solutions names and marks — is owned by Starlight Solutions, Inc. and protected by copyright and other laws.",
+      "The site itself — its interface, wording, the generation engine, the curated vocabulary, the scoring model and the Starlight Vanta and Starlight Solutions names and marks — is owned by Starlight Solutions and protected by copyright and other laws.",
       "You are granted a personal, revocable, non-exclusive licence to use the site as published. That licence does not include the right to copy the engine or vocabulary into another product, to resell access, or to present the service as your own.",
     ],
   },
@@ -51,8 +51,8 @@ const SECTIONS = [
     id: "donations",
     heading: "Donations",
     body: [
-      "Donations are voluntary contributions to Starlight Solutions, Inc. They are not a purchase, they do not buy a product, a feature, a service level or any other benefit, and they do not create a contract for the supply of anything.",
-      "Donations are not tax deductible. Starlight Solutions, Inc. is not a charitable organisation.",
+      "Donations are voluntary contributions to Starlight Solutions. They are not a purchase, they do not buy a product, a feature, a service level or any other benefit, and they do not create a contract for the supply of anything.",
+      "Donations are not tax deductible. Starlight Solutions is not a charitable organisation.",
       "Because nothing is supplied in return, donations are generally non-refundable, except where a refund is required by law or where a payment was made in error. Write to help@starsolenterprise.com before raising a dispute with your bank; a mistaken or duplicated payment is faster to resolve directly.",
       "Payments are processed by Stripe and are subject to Stripe's own terms. We never receive or store your card details.",
     ],
@@ -69,7 +69,7 @@ const SECTIONS = [
     id: "liability",
     heading: "Limitation of liability",
     body: [
-      "To the fullest extent permitted by law, Starlight Solutions, Inc. is not liable for indirect, incidental, special, consequential or punitive damages, or for loss of profit, goodwill, data or opportunity, arising from your use of the site or from your adoption of a generated name.",
+      "To the fullest extent permitted by law, Starlight Solutions is not liable for indirect, incidental, special, consequential or punitive damages, or for loss of profit, goodwill, data or opportunity, arising from your use of the site or from your adoption of a generated name.",
       "Where liability cannot be excluded, our total aggregate liability arising out of or relating to the site is limited to the greater of the amount you donated in the twelve months before the claim, or twenty-five US dollars.",
       "Nothing here excludes or limits liability that cannot lawfully be excluded, including for fraud or for death or personal injury caused by negligence. Some jurisdictions do not allow certain exclusions, in which case those exclusions apply only so far as that jurisdiction permits.",
     ],
@@ -78,7 +78,7 @@ const SECTIONS = [
     id: "indemnity",
     heading: "Indemnity",
     body: [
-      "You agree to indemnify Starlight Solutions, Inc. against claims, losses and reasonable legal costs arising from your use of the site in breach of these Terms, or from your use of a generated name in a way that infringes the rights of a third party.",
+      "You agree to indemnify Starlight Solutions against claims, losses and reasonable legal costs arising from your use of the site in breach of these Terms, or from your use of a generated name in a way that infringes the rights of a third party.",
     ],
   },
   {
@@ -93,8 +93,8 @@ const SECTIONS = [
     id: "law",
     heading: "Governing law",
     body: [
-      "These Terms are governed by the laws of the State of Delaware and applicable United States federal law, without regard to conflict-of-law rules. Before bringing a claim, write to legal@starsolenterprise.com so we can try to resolve it informally within 60 days.",
-      "Any dispute that is not resolved informally will be heard in the state or federal courts located in Delaware, and both sides consent to their jurisdiction. Nothing here removes mandatory consumer protections available to you where you live.",
+      "Applicable law governs these Terms. Before bringing a claim, write to legal@starsolenterprise.com so we can try to resolve it informally within 60 days. Planned incorporation in Wyoming does not establish a current place of incorporation or select its law.",
+      "Any dispute not resolved informally may be brought in a court with jurisdiction under applicable law. Nothing here removes mandatory consumer protections available where you live.",
       "If any provision of these Terms is found unenforceable, the rest remain in force. Not enforcing a provision straight away does not waive it.",
     ],
   },
@@ -110,9 +110,9 @@ export default function Terms() {
     <>
       <LegalPage
         title="Terms of service"
-        updated="27 October 2026"
+        updated="9 November 2026"
         intro={[
-          "Plain terms for a free tool, from Starlight Solutions, Inc., a Delaware corporation. The parts most worth reading are what a generated name does not come with, and how donations are treated.",
+          "Plain terms for a free tool, from Starlight Solutions, a business that is not yet incorporated and plans to incorporate in Wyoming. The parts most worth reading are what a generated name does not come with, and how donations are treated.",
         ]}
         sections={SECTIONS}
       />

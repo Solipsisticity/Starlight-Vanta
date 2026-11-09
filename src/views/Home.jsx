@@ -353,9 +353,9 @@ function Numbers() {
   const total = useCountUp(stats.total, statsLoaded && !reduceMotion);
 
   const rows = [
-    { label: "Names generated, all time", value: formatCount(total), note: `includes a disclosed ${formatCount(stats.baseline)} baseline` },
-    { label: "Generated today", value: formatCount(stats.today), note: "resets at midnight UTC" },
-    { label: "Generated this week", value: formatCount(stats.week), note: "rolling seven days" },
+    { label: "Names generated, all time", value: stats.configured ? formatCount(total) : "—", note: "recorded since the counter launched" },
+    { label: "Generated today", value: stats.configured ? formatCount(stats.today) : "—", note: "resets at midnight UTC" },
+    { label: "Generated this week", value: stats.configured ? formatCount(stats.week) : "—", note: "rolling seven days" },
     { label: "Busiest register this week", value: stats.styles?.[0]?.style || "—", note: stats.configured ? "across all visitors" : "counter warming up" },
   ];
 

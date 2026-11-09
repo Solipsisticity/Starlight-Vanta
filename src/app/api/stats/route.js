@@ -4,10 +4,9 @@ import { STYLES } from "@/lib/engine/lexicon";
 
 export const dynamic = "force-dynamic";
 
-const BASELINE = 5000;
 const MAX_PER_REQUEST = 240;
 const WRITES_PER_MINUTE = 20;
-const UNCONFIGURED = { configured: false, total: BASELINE, today: 0, week: 0, baseline: BASELINE, styles: [] };
+const UNCONFIGURED = { configured: false, total: 0, today: 0, week: 0, styles: [] };
 
 let schemaReady = false;
 
@@ -53,10 +52,9 @@ async function readStats(sql) {
     limit 5
   `;
   return {
-    total: BASELINE + Number(totals?.total ?? 0),
+    total: Number(totals?.total ?? 0),
     today: Number(totals?.today ?? 0),
     week: Number(totals?.week ?? 0),
-    baseline: BASELINE,
     styles: styles.map((row) => ({ style: row.style, names: Number(row.names) })),
   };
 }

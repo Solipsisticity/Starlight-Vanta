@@ -5,7 +5,7 @@ const SECTIONS = [
     id: "summary",
     heading: "The short version",
     body: [
-      "Starlight Vanta does not use advertising cookies, analytics cookies, tracking pixels or cross-site trackers. Your preferences and saved names live in your browser's local storage, and the only cookies come from Stripe, and only on the Donate page.",
+      "Starlight Vanta does not use advertising cookies, analytics cookies, tracking pixels or cross-site trackers. Your preferences and saved names live in your browser's local storage, Stripe may set payment cookies on the Donate page. Our delivery or security providers may also set necessary security cookies.",
     ],
   },
   {
@@ -26,7 +26,7 @@ const SECTIONS = [
     id: "stripe",
     heading: "Cookies on the Donate page",
     body: [
-      "When you open the Donate page, Stripe's payment script loads and may set these cookies to detect fraud and keep card payments safe. They are strictly necessary for taking a payment, and they are not set anywhere else on the site.",
+      "When you open the Donate page, Stripe's payment script loads and may set these cookies to detect fraud and keep card payments safe. They are strictly necessary for taking a payment, and Stripe does not load on the generator pages.",
     ],
     list: [
       "__stripe_mid: identifies the browser to Stripe's fraud checks. Lasts one year.",
@@ -37,7 +37,7 @@ const SECTIONS = [
     id: "none",
     heading: "What the site does not use",
     body: [
-      "There are no advertising, analytics, social media or session cookies, because there are no ads, no analytics tools and no accounts. If that ever changes, this policy will be updated first, and we will ask for consent wherever the law requires it.",
+      "The site itself does not install advertising, analytics, or social media cookies. Security providers may set a cookie during a bot check or challenge. If that ever changes, this policy will be updated first, and we will ask for consent wherever the law requires it.",
     ],
   },
   {
@@ -58,7 +58,7 @@ export default function Cookies() {
   return (
     <LegalPage
       title="Cookie policy"
-      updated="27 October 2026"
+      updated="9 November 2026"
       intro={["Every cookie and piece of browser storage Starlight Vanta can use, what each one is for, and how to remove it."]}
       sections={SECTIONS}
     />

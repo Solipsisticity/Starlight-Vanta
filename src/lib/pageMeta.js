@@ -55,7 +55,7 @@ export const PAGE_META = {
   "/cookies": {
     title: "Cookie policy",
     description:
-      "Every cookie and browser storage value Starlight Vanta can use: local preferences, saved names, and the two Stripe cookies on the Donate page.",
+      "Every cookie and browser storage value Starlight Vanta can use: local preferences, saved names, and Stripe payment cookies and possible security cookies.",
   },
   "/404": {
     title: "Page not found",
@@ -96,7 +96,7 @@ export const SITE_SCHEMA = {
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#publisher`,
-      name: "Starlight Solutions, Inc.",
+      name: "Starlight Solutions",
       url: "https://www.starsolenterprise.com/",
     },
   ],

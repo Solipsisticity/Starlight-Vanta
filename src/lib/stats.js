@@ -1,15 +1,13 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { isBrowser } from "./utils";
 
-const BASELINE = 5000;
 const FLUSH_DELAY = 4000;
 
 export const EMPTY_STATS = {
   configured: false,
-  total: BASELINE,
+  total: 0,
   today: 0,
   week: 0,
-  baseline: BASELINE,
   styles: [],
 };
 

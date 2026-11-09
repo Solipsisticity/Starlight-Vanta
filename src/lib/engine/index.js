@@ -62,8 +62,21 @@ function withEnding(stem, ending) {
   return base + ending;
 }
 
+const STYLE_PARTS = {
+  rare: { starts: ["aer", "elv", "lyr", "or", "sel", "ves", "zel", "kael", "nael", "ser", "thal", "valen"], ends: ["ion", "ora", "en", "iel", "is", "ara"] },
+  aesthetic: { starts: ["aura", "lumi", "mira", "sora", "vela", "ciela", "lila", "nora", "elara", "sylva", "melo", "seren"], ends: ["elle", "ora", "ine", "ia", "en", "is"] },
+  minimal: { starts: ["ali", "eva", "kai", "lio", "mio", "noa", "sai", "ael", "eno", "ivo", "tavi", "yara"], ends: ["an", "en", "el", "io", "on", "ra"] },
+  clean: { starts: ["aero", "cala", "mira", "nova", "sera", "vela", "luma"], ends: ["en", "ia", "on", "ora", "is", "el"] },
+  dark: { starts: ["ashen", "dusk", "noct", "raven", "umbra", "vesper", "sable", "nyra", "morrow", "shade", "hollow", "cinder"], ends: ["en", "is", "or", "ine", "ara", "el"] },
+  futuristic: { starts: ["axi", "cyra", "kine", "nexo", "prisma", "velox", "zyra", "syna", "vectra", "orbi", "quant", "tera"], ends: ["on", "ix", "ara", "ium", "is", "en"] },
+  gaming: { starts: ["aeg", "draven", "kairo", "nyx", "riven", "vex", "zeph"], ends: ["ar", "en", "ion", "is", "or", "yn"] },
+  nature: { starts: ["alder", "briar", "clover", "fern", "moss", "sorrel", "willow", "lark", "flora", "reed", "meadow", "tundra"], ends: ["en", "ia", "is", "on", "ora", "el"] },
+  mythic: { starts: ["aeg", "elys", "lyra", "orion", "sera", "thalia", "valka", "arion", "kaela", "mira", "selene", "taryn"], ends: ["el", "en", "is", "ora", "or", "iel"] },
+  experimental: { starts: ["aero", "cyno", "luma", "nexo", "riva", "sora", "vexa"], ends: ["en", "ia", "on", "ora", "is", "el"] },
+};
+
 function buildSingle(rng, pool) {
-  return rng.pick(rng.chance(0.35) ? SHORT_ROOTS : pool);
+  return rng.pick(pool);
 }
 
 function portmanteau(left, right) {
@@ -90,18 +103,23 @@ function buildBlend(rng, pool) {
   return options.length ? rng.pick(options) : null;
 }
 
-function buildRootAffix(rng, pool) {
-  const root = trimRoot(rng.pick(rng.chance(0.4) ? SHORT_ROOTS : pool));
+function buildRootAffix(rng, pool, style) {
+  const root = trimRoot(rng.pick(pool));
   if (root.length > 7) return null;
-  return withEnding(root, rng.pick(ENDINGS));
+  return withEnding(root, rng.pick(STYLE_PARTS[style]?.ends || ENDINGS));
 }
 
-function buildCoined(rng) {
-  return coinWord(rng, rng.chance(0.7) ? 2 : 3);
+function buildCoined(rng, pool, style) {
+  const parts = STYLE_PARTS[style] || STYLE_PARTS.aesthetic;
+  for (let attempt = 0; attempt < 8; attempt += 1) {
+    const word = joinParts(rng.pick(parts.starts), rng.pick(parts.ends));
+    if (isPronounceable(word) && !/(.{2,3})\1/.test(word)) return word;
+  }
+  return coinWord(rng, 2);
 }
 
-function buildCompound(rng, pool) {
-  const left = rng.pick(SHORT_ROOTS);
+function buildCompound(rng, pool, style) {
+  const left = rng.pick(STYLE_PARTS[style]?.starts || SHORT_ROOTS);
   const right = trimRoot(rng.pick(pool));
   if (left === right || right.startsWith(left) || right.length > 7) return null;
   if (isVowel(left[left.length - 1]) && isVowel(right[0])) return null;
@@ -109,8 +127,15 @@ function buildCompound(rng, pool) {
   return compound.length >= 5 && compound.length <= 11 ? compound : null;
 }
 
+function buildShort(rng) {
+  const start = rng.pick(["b", "c", "d", "f", "g", "h", "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "z"]);
+  const middle = rng.pick(["a", "e", "i", "o", "u"]);
+  const end = rng.pick(["d", "l", "m", "n", "r", "s", "t", "v", "y"]);
+  return start + middle + end;
+}
+
 function buildNumbered(rng, pool) {
-  const base = rng.chance(0.5) ? buildSingle(rng, pool) : buildRootAffix(rng, pool);
+  const base = rng.chance(0.5) ? buildSingle(rng, pool) : buildRootAffix(rng, pool, "rare");
   return base ? base + rng.pick(NUMBER_SUFFIXES) : null;
 }
 
@@ -118,7 +143,7 @@ const BUILDERS = {
   single: buildSingle,
   blend: buildBlend,
   "root-affix": buildRootAffix,
-  coined: (rng) => buildCoined(rng),
+  coined: buildCoined,
   compound: buildCompound,
   numbered: buildNumbered,
 };
@@ -141,6 +166,8 @@ function applyTone(rng, name, tone) {
   }
 }
 
+const COMMON_SHORT_WORDS = new Set(["and", "are", "art", "bad", "bat", "bed", "bet", "big", "bit", "boy", "bus", "but", "can", "car", "cat", "cod", "cut", "day", "did", "dig", "dog", "dot", "dry", "ear", "eat", "end", "far", "fat", "fed", "few", "fit", "fix", "fly", "for", "fun", "get", "god", "got", "had", "has", "hat", "her", "hey", "him", "his", "hit", "hot", "how", "its", "job", "joy", "key", "kid", "law", "lay", "let", "lid", "lie", "lip", "lit", "log", "lot", "low", "mad", "man", "map", "mat", "may", "men", "met", "mix", "mom", "mud", "new", "nod", "nor", "not", "now", "nut", "odd", "off", "old", "one", "our", "out", "own", "pan", "pay", "pen", "pet", "pie", "pig", "pin", "pit", "pop", "pot", "put", "ran", "rat", "raw", "red", "rid", "rip", "rob", "rod", "row", "rub", "run", "sad", "sat", "saw", "say", "sea", "see", "set", "she", "shy", "sin", "sir", "sit", "six", "sky", "son", "sun", "tan", "tap", "tar", "tax", "tea", "ten", "the", "tie", "tin", "tip", "toe", "top", "toy", "try", "two", "use", "van", "war", "was", "way", "web", "wed", "wet", "who", "why", "win", "wit", "won", "yes", "yet", "you", "zip", "zoo"]);
+
 const ENGLISH_NOISE = /their|there|about|would|could|should|people|through|another|between|nothing|thing|which|where|because|please|really/;
 
 const FLOW_FLOOR = { coined: 84, blend: 80, compound: 72, seeded: 76, remix: 76, default: 74 };
@@ -155,8 +182,9 @@ function isAcceptable(name, config, structure = "default") {
 
   const letters = bare.replace(/[0-9_]/g, "");
   if (!isPronounceable(letters)) return false;
-  if (ENGLISH_NOISE.test(letters)) return false;
-  if (!WHOLE_WORD_STRUCTURES.has(structure) && structure !== "numbered" && !soundsNatural(letters)) return false;
+  if (ENGLISH_NOISE.test(letters) || COMMON_SHORT_WORDS.has(letters) || /ii|uu|yy/.test(letters)) return false;
+  if (/(.{2,4})\1/.test(letters) || /(xix|isis|enen|elel|erer)$/.test(letters)) return false;
+  if (!WHOLE_WORD_STRUCTURES.has(structure) && structure !== "numbered" && structure !== "coined" && !soundsNatural(letters)) return false;
   return flow(letters) >= (FLOW_FLOOR[structure] ?? FLOW_FLOOR.default);
 }
 
@@ -164,7 +192,7 @@ export const DEFAULT_CONFIG = {
   style: "aesthetic",
   minLength: 4,
   maxLength: 10,
-  structures: ["single", "blend", "root-affix"],
+  structures: ["coined"],
   tone: "lowercase",
   allowDigits: false,
   allowSeparators: false,
@@ -211,8 +239,8 @@ export function generate(rawConfig, count = 12, seed = randomSeed()) {
   while (results.size < count && attempts < count * 160) {
     attempts += 1;
     const structure = active[attempts % active.length];
-    const raw = BUILDERS[structure](rng, pool);
-    if (!raw) continue;
+    const raw = config.maxLength === 3 ? buildShort(rng) : BUILDERS[structure](rng, pool, config.style);
+    if (!raw || (structure === "coined" && pool.includes(raw))) continue;
 
     const toned = applyTone(rng, String(raw).toLowerCase(), config.tone);
     if (!isAcceptable(toned, config, structure)) continue;
@@ -221,13 +249,13 @@ export function generate(rawConfig, count = 12, seed = randomSeed()) {
     if (results.has(key)) continue;
 
     const stem = key.slice(0, 3);
-    if ((stems.get(stem) || 0) >= 2) continue;
+    if ((stems.get(stem) || 0) >= 1) continue;
     stems.set(stem, (stems.get(stem) || 0) + 1);
 
     results.set(key, decorate(toned, config, structure));
   }
 
-  return [...results.values()].sort((a, b) => b.rarity + b.flow - (a.rarity + a.flow));
+  return [...results.values()];
 }
 
 function collect(recipes, count, accept) {
@@ -323,7 +351,7 @@ export const PRESETS = [
   },
   {
     name: "Invented",
-    desc: "Words that have never existed, built from legal syllables.",
+    desc: "Invented-sounding names assembled from curated syllable parts.",
     config: { style: "mythic", minLength: 5, maxLength: 9, structures: ["coined"], tone: "lowercase", allowDigits: false, allowSeparators: false },
   },
   {
