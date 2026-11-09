@@ -66,13 +66,13 @@ const STYLE_PARTS = {
   rare: { starts: ["aer", "elv", "lyr", "or", "sel", "ves", "zel", "kael", "nael", "ser", "thal", "valen"], ends: ["ion", "ora", "en", "iel", "is", "ara"] },
   aesthetic: { starts: ["aura", "lumi", "mira", "sora", "vela", "ciela", "lila", "nora", "elara", "sylva", "melo", "seren"], ends: ["elle", "ora", "ine", "ia", "en", "is"] },
   minimal: { starts: ["ali", "eva", "kai", "lio", "mio", "noa", "sai", "ael", "eno", "ivo", "tavi", "yara"], ends: ["an", "en", "el", "io", "on", "ra"] },
-  clean: { starts: ["aero", "cala", "mira", "nova", "sera", "vela", "luma"], ends: ["en", "ia", "on", "ora", "is", "el"] },
+  clean: { starts: ["aero", "cala", "mira", "nova", "sera", "vela", "luma", "elio", "orla", "talia", "renna", "sola", "cira", "maro"], ends: ["en", "ia", "on", "ora", "is", "el"] },
   dark: { starts: ["ashen", "dusk", "noct", "raven", "umbra", "vesper", "sable", "nyra", "morrow", "shade", "hollow", "cinder"], ends: ["en", "is", "or", "ine", "ara", "el"] },
   futuristic: { starts: ["axi", "cyra", "kine", "nexo", "prisma", "velox", "zyra", "syna", "vectra", "orbi", "quant", "tera"], ends: ["on", "ix", "ara", "ium", "is", "en"] },
-  gaming: { starts: ["aeg", "draven", "kairo", "nyx", "riven", "vex", "zeph"], ends: ["ar", "en", "ion", "is", "or", "yn"] },
+  gaming: { starts: ["aeg", "draven", "kairo", "nyx", "riven", "vex", "zeph", "ashen", "cyron", "kaldr", "lyrix", "torven", "zarek", "veldr"], ends: ["ar", "en", "ion", "is", "or", "yn"] },
   nature: { starts: ["alder", "briar", "clover", "fern", "moss", "sorrel", "willow", "lark", "flora", "reed", "meadow", "tundra"], ends: ["en", "ia", "is", "on", "ora", "el"] },
   mythic: { starts: ["aeg", "elys", "lyra", "orion", "sera", "thalia", "valka", "arion", "kaela", "mira", "selene", "taryn"], ends: ["el", "en", "is", "ora", "or", "iel"] },
-  experimental: { starts: ["aero", "cyno", "luma", "nexo", "riva", "sora", "vexa"], ends: ["en", "ia", "on", "ora", "is", "el"] },
+  experimental: { starts: ["aero", "cyno", "luma", "nexo", "riva", "sora", "vexa", "mireo", "zylo", "orien", "talya", "voran", "elara", "kyro"], ends: ["en", "ia", "on", "ora", "is", "el"] },
 };
 
 function buildSingle(rng, pool) {
