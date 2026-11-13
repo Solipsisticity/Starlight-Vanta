@@ -5,7 +5,7 @@ const SECTIONS = [
     id: "agreement",
     heading: "Agreement",
     body: [
-      "These Terms govern your use of Starlight Vanta at vanta.starsolenterprise.com, operated by Starlight Solutions, a business that is not yet incorporated and plans to incorporate in Wyoming. By using the site you accept them, together with our Privacy Policy and Cookie Policy. If you do not accept them, do not use the site.",
+      "These Terms govern your use of Starlight Vanta at vanta.starsolenterprise.com, operated by Starlight Solutions, Inc., a Wyoming corporation. By using the site you accept them, together with our Privacy Policy, Cookie Policy, and the company-wide Terms of Service at starsolenterprise.com/terms. These product terms control for subjects they address specifically; the company-wide terms govern other matters. If you do not accept them, do not use the site.",
       "There is no account to create, so acceptance is by use. You must be old enough to enter into a binding agreement where you live, and at least 13 years old, to use the site.",
     ],
   },
@@ -55,6 +55,16 @@ const SECTIONS = [
       "Donations are not tax deductible. Starlight Solutions is not a charitable organisation.",
       "Because nothing is supplied in return, donations are generally non-refundable, except where a refund is required by law or where a payment was made in error. Write to help@starsolenterprise.com before raising a dispute with your bank; a mistaken or duplicated payment is faster to resolve directly.",
       "Payments are processed by Stripe and are subject to Stripe's own terms. We never receive or store your card details.",
+      "We may retain the customer, transaction, donation, refund, dispute, chargeback, risk and limited payment-method information Stripe makes available when reasonably necessary to administer the donation, issue a receipt or refund, prevent or investigate fraud and abuse, keep accounting and tax records, comply with law or legal process, enforce our agreements, or establish, exercise or defend legal claims.",
+    ],
+  },
+  {
+    id: "infrastructure",
+    heading: "Infrastructure, domains and provider changes",
+    body: [
+      "We may select, replace or migrate hosting, cloud, storage, payment, security, DNS, domain-registration, certificate and other infrastructure providers, and may change servers, data centres, domains, subdomains, network addresses, endpoints or deployment architecture, when reasonably necessary to operate, maintain, secure, restore, scale, improve or transition Vanta, or to comply with law.",
+      "A migration may require transaction, counter, configuration, security and other records to be transferred to a successor provider. Personal-information processing remains subject to the Privacy Policy, applicable safeguards and applicable law. Replacing infrastructure does not authorise a materially different use of information previously collected.",
+      "We may redirect Vanta to an official replacement address and discontinue an earlier address after a reasonable transition where practicable. A migration may cause temporary interruption. Nothing in this section limits a right that cannot lawfully be waived.",
     ],
   },
   {
@@ -93,9 +103,10 @@ const SECTIONS = [
     id: "law",
     heading: "Governing law",
     body: [
-      "Applicable law governs these Terms. Before bringing a claim, write to legal@starsolenterprise.com so we can try to resolve it informally within 60 days. Planned incorporation in Wyoming does not establish a current place of incorporation or select its law.",
-      "Any dispute not resolved informally may be brought in a court with jurisdiction under applicable law. Nothing here removes mandatory consumer protections available where you live.",
+      "Wyoming law and applicable United States federal law govern these Terms, without regard to conflict-of-law rules. Before bringing a claim, write to legal@starsolenterprise.com so we can try to resolve it informally within 30 days. This does not prevent urgent injunctive relief or a filing needed to preserve a legal deadline.",
+      "Except where mandatory law provides otherwise, any dispute not resolved informally must be brought in a court with jurisdiction in Wyoming. Nothing here removes mandatory consumer protections or forums available where you live.",
       "If any provision of these Terms is found unenforceable, the rest remain in force. Not enforcing a provision straight away does not waive it.",
+      "The English version is the original and controlling version. Any translation is offered solely for convenience and accessibility. Although we use reasonable care, we cannot guarantee that a translation is complete, current or error-free. If a translation conflicts with the English version, the English version governs unless applicable law requires otherwise.",
     ],
   },
   {
@@ -110,9 +121,9 @@ export default function Terms() {
     <>
       <LegalPage
         title="Terms of service"
-        updated="9 November 2026"
+        updated="13 November 2026"
         intro={[
-          "Plain terms for a free tool, from Starlight Solutions, a business that is not yet incorporated and plans to incorporate in Wyoming. The parts most worth reading are what a generated name does not come with, and how donations are treated.",
+          "Terms for a free tool operated by Starlight Solutions, Inc. The sections on generated names, donations, infrastructure and liability deserve particular attention.",
         ]}
         sections={SECTIONS}
       />

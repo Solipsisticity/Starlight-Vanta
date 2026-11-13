@@ -13,7 +13,7 @@ const SECTIONS = [
     id: "who",
     heading: "Who is responsible",
     body: [
-      "Starlight Vanta is operated by Starlight Solutions (“we”, “us”). Questions about this policy can be sent to privacy@starsolenterprise.com.",
+      "Starlight Vanta is operated by Starlight Solutions, Inc., a Wyoming corporation (“Starlight”, “we”, “us”), which is the controller or business responsible for the personal information described here. This notice applies to vanta.starsolenterprise.com, supplements the company-wide Privacy Policy at starsolenterprise.com/privacy, and controls for Vanta-specific processing. Questions and requests can be sent to privacy@starsolenterprise.com.",
     ],
   },
   {
@@ -44,17 +44,41 @@ const SECTIONS = [
     heading: "Donations",
     body: [
       "Donations are processed by Stripe, Inc. When you open the donation form, your card details are entered directly into an element hosted and controlled by Stripe. Those details never pass through this site and are never stored by us.",
-      "We receive from Stripe only what is needed to reconcile a payment: the amount, the currency and the payment reference. Stripe processes your information as an independent controller under its own privacy policy, available at stripe.com/privacy.",
+      "Stripe makes available information needed to reconcile and protect a payment, which may include a customer or payment reference, amount, currency, payment status, billing details, card brand and last four digits, risk signals, refunds, disputes and chargebacks. We do not receive the full card number or security code. Stripe also processes information under its own privacy notice.",
       "Stripe's script, which only loads on the Donate page, sets two cookies used for fraud prevention. They are listed in the Cookie Policy.",
-      "We do not store a record linking a donation to your use of the generator.",
+      "We do not use a donation record to profile your generator activity. We may retain information Stripe makes available when reasonably necessary to administer the donation, issue a receipt or refund, prevent or investigate fraud and abuse, keep accounting and tax records, comply with law or legal process, or establish, exercise or defend legal claims.",
     ],
   },
   {
     id: "infrastructure",
     heading: "Hosting and security logs",
     body: [
-      "The site is served through Vercel and Cloudflare. As with any website, their networks necessarily process the IP address and user-agent of incoming requests in order to deliver the page and to defend against attack. Those records are held by those providers under their own retention policies and are used for delivery and security only.",
+      "As of this policy's effective date, the site is served through Vercel and Cloudflare. As with any website, their networks necessarily process the IP address and user-agent of incoming requests in order to deliver the page and to defend against attack. Those records are held under applicable provider retention practices and are used for delivery and security.",
       "We do not run our own request logging, and we do not build profiles from any of it.",
+    ],
+  },
+  {
+    id: "providers",
+    heading: "Provider and infrastructure changes",
+    body: [
+      "We may replace or add hosting, cloud, storage, content-delivery, payment, DNS, domain and security providers. A successor provider may receive information reasonably necessary to perform the same or a disclosed compatible function, subject to appropriate contractual, confidentiality, security and international-transfer safeguards where applicable.",
+      "Replacing a provider does not authorise a materially different use of information collected under this policy. If a change materially alters the purposes of processing or categories of recipients, we will update this policy and provide any additional notice, choice or consent required by applicable law before the change applies.",
+    ],
+  },
+  {
+    id: "legal-bases",
+    heading: "Purposes and legal bases",
+    body: [
+      "We process request data to deliver and secure the site; optional counter messages to maintain the public aggregate you choose to contribute to; and payment information to process, reconcile and protect donations, issue refunds, maintain required records and resolve disputes. Where the EEA or UK GDPR applies, these activities rely, as applicable, on performance of a contract or steps you request, compliance with legal obligations, and our legitimate interests in operating the site, maintaining an accurate aggregate counter, preventing fraud and defending legal claims. If an optional use requires consent, we will request it separately and you may withdraw it prospectively.",
+    ],
+  },
+  {
+    id: "retention",
+    heading: "Retention, transfers and security",
+    body: [
+      "Local favorites, history and settings remain on your device until you or the browser removes them. Counter records are retained as aggregate daily totals rather than visitor records. Payment, refund, tax and accounting records are generally retained for seven years, unless a different period is required or permitted by law. Fraud, dispute, chargeback and legal-hold records may be kept longer while reasonably necessary for the matter and applicable limitation period.",
+      "Starlight and its providers may process request and payment information in the United States and other countries. Where the EEA, UK, Switzerland or another jurisdiction requires a transfer mechanism, we use an applicable adequacy decision, approved contractual clauses or another lawful safeguard.",
+      "We use administrative and technical safeguards appropriate to the limited information processed, including encrypted transport, access controls and provider security measures. No system is completely secure. Report a suspected vulnerability to security@starsolenterprise.com.",
     ],
   },
   {
@@ -77,7 +101,8 @@ const SECTIONS = [
     id: "changes",
     heading: "Changes",
     body: [
-      "If this policy changes, the date at the top of this page changes with it. Material changes will be described on the page rather than folded in silently.",
+      "If this policy changes, the date at the top of this page changes with it. We will provide additional notice or obtain consent where required by law. We will not apply a materially different use to previously collected information merely by changing this policy.",
+      "The English version is the original and controlling version. Any translation is offered solely for convenience and accessibility and cannot be guaranteed to be complete, current or error-free. If a translation conflicts with the English version, the English version governs unless applicable law requires otherwise.",
     ],
   },
 ];
@@ -87,9 +112,9 @@ export default function Privacy() {
     <>
       <LegalPage
         title="Privacy policy"
-        updated="9 November 2026"
+        updated="13 November 2026"
         intro={[
-          "This policy describes what Starlight Vanta collects, which is close to nothing, and where the few exceptions are.",
+          "This policy explains the limited information Starlight Vanta processes, the purposes for which it is used, and your available choices and rights.",
         ]}
         sections={SECTIONS}
       />

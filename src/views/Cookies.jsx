@@ -48,6 +48,14 @@ const SECTIONS = [
     ],
   },
   {
+    id: "providers",
+    heading: "Provider changes and language",
+    body: [
+      "We may replace hosting, network-security or payment providers. If that changes the cookies or browser storage used on your device, we will update this policy and obtain consent before using optional technology where applicable law requires it.",
+      "The English version is the original and controlling version. Any translation is offered solely for convenience and accessibility and cannot be guaranteed to be complete, current or error-free. If a translation conflicts with the English version, the English version governs unless applicable law requires otherwise.",
+    ],
+  },
+  {
     id: "contact",
     heading: "Contact",
     body: ["Questions about this policy can be sent to privacy@starsolenterprise.com."],
@@ -58,7 +66,7 @@ export default function Cookies() {
   return (
     <LegalPage
       title="Cookie policy"
-      updated="9 November 2026"
+      updated="13 November 2026"
       intro={["Every cookie and piece of browser storage Starlight Vanta can use, what each one is for, and how to remove it."]}
       sections={SECTIONS}
     />
